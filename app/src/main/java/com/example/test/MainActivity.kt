@@ -206,7 +206,7 @@ fun WhiteTheme() {
 }
 @Composable
 @Preview(showBackground = true, widthDp = 393, heightDp = 808)
-fun Card(){//TODO
+fun Card(){//TODO/f
     val cyan = Color(198, 235,255, 255)
     Surface(
         shape = MaterialTheme.shapes.medium,
