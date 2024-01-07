@@ -69,7 +69,7 @@ fun WhiteTheme() {
     )
     Column(
         Modifier
-            .background(Color.Red)
+            .background(Color.White)
             .wrapContentHeight()
             .padding(4.dp),
         horizontalAlignment = Alignment.CenterHorizontally
