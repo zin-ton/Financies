@@ -38,6 +38,8 @@ import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.time.LocalDateTime
@@ -190,9 +192,19 @@ fun WhiteTheme() {
         Spacer(Modifier.height(10.dp))
     }
 }
+
 @Composable
 @Preview(showBackground = true, widthDp = 393, heightDp = 808)
-fun Card(){//TODO
+fun Card(/*money : Int, types: Map<String, Int>*/){//TODO
+    val money = 100
+    val types = mapOf<String, Int>(
+        "clothing" to 100,
+        "food" to 75,
+        "gas" to 74,
+        "medicine" to 70,
+        "rent" to 50,
+        "transport" to 30
+    )
     val cyan = Color(198, 235,255, 255)
     val lexend = GoogleFont("Lexend")
     val currentDateTime = LocalDateTime.now()
@@ -238,7 +250,8 @@ fun Card(){//TODO
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight(300)
                 )
-                Text("Total: -540 usd",
+                Text(
+                    "Total: ${money} usd",
                     fontSize = 18.sp,
                     fontFamily = lexendFamily,
                     fontStyle = FontStyle.Normal,
@@ -250,42 +263,240 @@ fun Card(){//TODO
                     .fillMaxWidth()
                     .height(4.dp)
             )
-            Image(
-                painter = foodImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
-            Image(
-                painter = clothingImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
-            Image(
-                painter = gasImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
-            Image(
-                painter = medicineImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
-            Image(
-                painter = rentImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
-            Image(
-                painter = transportImage,
-                contentDescription = null,
-                Modifier
-                    .size(40.dp, 40.dp)
-            )
+            for((key, value) in types){
+                val temp = when(key){
+                    "clothing" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = clothingImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    clothing",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    "food" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = foodImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    food",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    "gas" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = gasImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    gas",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    "medicine" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = medicineImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    medicine",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    "rent" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = rentImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    rent",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    "transport" -> Row(
+                        Modifier
+                            .background(cyan)
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Image(
+                            painter = transportImage,
+                            contentDescription = null,
+                            Modifier
+                                .size(40.dp, 40.dp)
+                        )
+                        Row(
+                            Modifier
+                                .background(cyan)
+                                .wrapContentHeight()
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "    transport",
+                                fontSize = 20.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                            Text(
+                                text = "$value USD",
+                                fontSize = 18.sp,
+                                fontFamily = lexendFamily,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight(300)
+                            )
+                        }
+                    }
+                    else -> {}
+                }
+            }
         }
     }
+
 }

@@ -5,6 +5,9 @@
       <entry key="Card">
         <State />
       </entry>
+      <entry key="CardPreview">
+        <State />
+      </entry>
       <entry key="WhiteTheme">
         <State />
       </entry>
