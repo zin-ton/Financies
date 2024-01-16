@@ -2,13 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Card">
+      <entry key="Card (1)">
         <State />
       </entry>
-      <entry key="CardPreview">
+      <entry key="CardComponent">
         <State />
       </entry>
-      <entry key="WhiteTheme">
+      <entry key="FullHistory">
+        <State />
+      </entry>
+      <entry key="HistoryCard">
+        <State />
+      </entry>
+      <entry key="MenuComponent">
         <State />
       </entry>
       <entry key="app">
