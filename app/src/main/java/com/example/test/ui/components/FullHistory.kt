@@ -3,6 +3,7 @@ package com.example.test.ui.components
 import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,19 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -37,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.test.R
+import com.example.test.database.DatabaseViewModel
 import com.example.test.ui.theme.Cyan
 import com.example.test.ui.theme.Grey
 import java.time.LocalDateTime
@@ -46,13 +55,16 @@ import java.util.Locale
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun FullHistory(array: ArrayList<Pair<String, Int>>){
+fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),  onButtonClick: () ->Unit) {
+    val allData by viewModel.allData.collectAsState()
+    LaunchedEffect(Unit) {
+        viewModel.getAllData()
+    }
     var money: Int
     money = 0
-    for (i in array) {
-        money += i.second
+    for (i in allData) {
+        money += i.summ
     }
-
     val currentDateTime = LocalDateTime.now()
     val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH)
     val formattedDateTime = currentDateTime.format(formatter)
@@ -81,31 +93,40 @@ fun FullHistory(array: ArrayList<Pair<String, Int>>){
         )
         Card(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .fillMaxHeight(0.95f)
                 .padding(16.dp)
                 .verticalScroll(scrollState)
-                .background(Cyan),
-        ){
-            for(i in array){
+                .background(Cyan)
+                .clickable { },
+            colors = CardDefaults.cardColors(containerColor = Cyan),
+        ) {
+            for (i in allData.size - 1 downTo 0) {
                 var image = painterResource(id = R.drawable.gas)
-                if(i.first.equals("Food")) {image = painterResource(id = R.drawable.food)
+                if (allData[i].type.equals("Food")) {
+                    image = painterResource(id = R.drawable.food)
                 }
-                if(i.first.equals("Clothes")) {image = painterResource(id = R.drawable.clothing)
+                if (allData[i].type.equals("Clothes")) {
+                    image = painterResource(id = R.drawable.clothing)
                 }
-                if(i.first.equals("Gas")) {image = painterResource(id = R.drawable.gas)
+                if (allData[i].type.equals("Gas")) {
+                    image = painterResource(id = R.drawable.gas)
                 }
-                if(i.first.equals("Medicine")) {image = painterResource(id = R.drawable.medicine)
+                if (allData[i].type.equals("Medicine")) {
+                    image = painterResource(id = R.drawable.medicine)
                 }
-                if(i.first.equals("Rent")) {image = painterResource(id = R.drawable.rent)
+                if (allData[i].type.equals("Rent")) {
+                    image = painterResource(id = R.drawable.rent)
                 }
-                if(i.first.equals("Transport")) {image = painterResource(id = R.drawable.transport)
+                if (allData[i].type.equals("Transport")) {
+                    image = painterResource(id = R.drawable.transport)
                 }
                 Row(
                     Modifier
                         .background(Cyan)
                         .fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Image(painter = image, contentDescription = null, Modifier.size(40.dp, 40.dp))
                     Row(
                         Modifier
@@ -116,17 +137,32 @@ fun FullHistory(array: ArrayList<Pair<String, Int>>){
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = i.first,
+                            text = allData[i].type,
                             style = MaterialTheme.typography.bodyLarge
                         )
                         Text(
-                            text = "${i.second} USD",
+                            text = "${allData[i].summ} USD",
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }
                 }
-                Box(modifier = Modifier.fillMaxWidth().height(10.dp).background(Cyan))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(10.dp)
+                        .background(Cyan)
+                )
             }
+        }
+        Button(
+            onClick = onButtonClick,
+            Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = Grey, contentColor = Color.Black),
+            shape = RoundedCornerShape(40.dp)
+        ) {
+            Text("Less", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }

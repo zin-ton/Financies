@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.test.R
 
@@ -16,7 +17,8 @@ private val provider = GoogleFont.Provider(
     certificates = R.array.com_google_android_gms_fonts_certs
 )
 val fontName = GoogleFont("Lexend")
-
+val fontName2 = GoogleFont("Inter")
+val fontFamily2 = FontFamily(Font(googleFont = fontName2, fontProvider = provider))
 val fontFamily = FontFamily(Font(googleFont = fontName, fontProvider = provider))
 val Typography = Typography(
     bodyLarge = TextStyle(
@@ -42,5 +44,12 @@ val Typography = Typography(
         fontSize = 17.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.3.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = fontFamily2,
+        fontStyle =FontStyle.Normal,
+        fontWeight = FontWeight(400),
+        textAlign = TextAlign.Center,
+        fontSize = 16.sp
     )
 )

@@ -2,16 +2,16 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Card (1)">
-        <State />
-      </entry>
-      <entry key="CardComponent">
-        <State />
-      </entry>
       <entry key="FullHistory">
         <State />
       </entry>
       <entry key="HistoryCard">
+        <State />
+      </entry>
+      <entry key="LoginAndRegisterPage">
+        <State />
+      </entry>
+      <entry key="MainPage">
         <State />
       </entry>
       <entry key="MenuComponent">

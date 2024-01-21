@@ -47,21 +47,21 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+//    primary = Purple80,
+//    secondary = PurpleGrey80,
+//    tertiary = Pink80
 )
 private val LightColorScheme = lightColorScheme(
-    primary = Cyan,
-    secondary = Cyan,
-    tertiary = Cyan,
-    background = Cyan,
-    surface = Cyan,
-    onPrimary = Color.Black,
-    onSecondary = Cyan,
-    onTertiary = Cyan,
-    onBackground = Cyan,
-    onSurface = Cyan,
+//    primary = Cyan,
+//    secondary = Cyan,
+//    tertiary = Cyan,
+//    background = Cyan,
+//    surface = Cyan,
+//    onPrimary = Color.Black,
+//    onSecondary = Cyan,
+//    onTertiary = Cyan,
+//    onBackground = Cyan,
+//    onSurface = Cyan,
 )
 
 @Composable

@@ -13,6 +13,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -20,15 +23,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.room.Room
 import com.example.test.R
+import com.example.test.database.DatabaseViewModel
 import com.example.test.ui.theme.Cyan
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun CardComponent(component: Pair<String, Int>){
-//    var component : Pair<String, Int>
-//    component = Pair("Food", 100)
+fun CardComponent(id : Int, viewModel: DatabaseViewModel = viewModel()){
+    var component : Pair<String, Int>
+    component = Pair("Food", 100)
+    val allData by viewModel.allData.collectAsState()
+    LaunchedEffect(Unit){
+        viewModel.getAllData()
+    }
+
+    for(i in allData){
+        if(i.id == id){
+            component = Pair(i.type, i.summ)
+            break
+        }
+    }
     var image = painterResource(id = R.drawable.gas)
     if(component.first.equals("Food")) {image = painterResource(id = R.drawable.food)}
     if(component.first.equals("Clothes")) {image = painterResource(id = R.drawable.clothing)}
