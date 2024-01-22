@@ -66,10 +66,12 @@ class MainActivity : ComponentActivity(), ViewModelStoreOwner {
                     startDestination = "main",
                 ){
                     composable("main"){ navBackStackEntry ->
+                        viewModel.updateTabIndex(0)
                         MainPage(viewModel = viewModel, navController)
                     }
                     composable("history"){navBackStackEntry ->
                         //HistoryScreen(navControler = navController, viewModel = viewModel)
+                        viewModel.updateTabIndex(1)
                         HistoryPage(navController, viewModel)
                     }
                     composable("full_history"){navBackStackEntry ->

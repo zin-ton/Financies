@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,8 +52,12 @@ import kotlinx.coroutines.launch
 fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: NavController) {
     val tabList = listOf("Main", "History")
     val pagerState = rememberPagerState()
-    var tabIndex by remember { mutableStateOf(0) }
-    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(viewModel.selectedTabIndex.value) {
+        val index = viewModel.selectedTabIndex.value
+        pagerState.animateScrollToPage(index)
+    }
+
     Column(
         Modifier
             .background(Color.White)
@@ -62,7 +67,7 @@ fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: Nav
             .clip(RoundedCornerShape(5.dp)),
     ) {
         TabRow(
-            selectedTabIndex = tabIndex,
+            selectedTabIndex = viewModel.selectedTabIndex.value,
             indicator = {
                 TabRowDefaults.Indicator(
                     Modifier.pagerTabIndicatorOffset(pagerState, it)
@@ -74,13 +79,10 @@ fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: Nav
         ) {
             tabList.forEachIndexed { index, text ->
                 Tab(
-                    selected = tabIndex == index,
+                    selected = viewModel.selectedTabIndex.value == index,
                     onClick = {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(index)
-                        }
-                        tabIndex = index
-                        when (tabIndex){
+                        viewModel.updateTabIndex(index)
+                        when (index) {
                             0 -> navController.navigate("main")
                             1 -> navController.navigate("history")
                         }
@@ -95,10 +97,9 @@ fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: Nav
             count = tabList.size,
             state = pagerState
         ) { page ->
-//            when (page) {
-//                0 -> navController.navigate("main")
-//                1 -> navController.navigate("history")
-//            }
+
         }
     }
 }
+
+

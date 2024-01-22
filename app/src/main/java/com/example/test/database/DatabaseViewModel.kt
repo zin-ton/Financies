@@ -2,6 +2,7 @@ package com.example.test.database
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,12 @@ class DatabaseViewModel(private val myDataDao: MyDataDao) : ViewModel() {
     val allData : StateFlow<List<Data>> = _allData.asStateFlow()
     /*constructor() : this(){
     }*/
+    private val _selectedTabIndex = mutableStateOf(0)
+    val selectedTabIndex: State<Int> = _selectedTabIndex
+
+    fun updateTabIndex(index: Int) {
+        _selectedTabIndex.value = index
+    }
     fun getAllData() {
         viewModelScope.launch(Dispatchers.IO) {
             _allData.value = myDataDao.getAllData() ?: emptyList()
