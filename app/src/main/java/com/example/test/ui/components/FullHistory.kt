@@ -44,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import com.example.test.R
 import com.example.test.database.DatabaseViewModel
 import com.example.test.ui.theme.Cyan
@@ -55,7 +56,7 @@ import java.util.Locale
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),  onButtonClick: () ->Unit) {
+fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),  navController: NavController) {
     val allData by viewModel.allData.collectAsState()
     LaunchedEffect(Unit) {
         viewModel.getAllData()
@@ -74,6 +75,7 @@ fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.comp
             .background(Cyan)
             .fillMaxHeight()
             .fillMaxWidth(0.95f),
+        //horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Wallet 1 transaction history", style = MaterialTheme.typography.bodyLarge)
         Row(
@@ -155,7 +157,9 @@ fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.comp
             }
         }
         Button(
-            onClick = onButtonClick,
+            onClick = {
+                      navController.navigate("history")
+            },
             Modifier
                 .fillMaxHeight()
                 .fillMaxWidth(),

@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.test.R
 import com.example.test.database.DatabaseViewModel
 import com.example.test.ui.components.MenuComponent
@@ -26,7 +27,7 @@ import com.example.test.ui.theme.Cyan
 
 @Composable
 @Preview
-fun MainPage(viewModel: DatabaseViewModel){
+fun MainPage(viewModel: DatabaseViewModel, navController: NavController){
     var image = painterResource(id = R.drawable.baseline_add_24)
     Column(
         Modifier
@@ -34,8 +35,8 @@ fun MainPage(viewModel: DatabaseViewModel){
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MenuComponent(viewModel)
-        Spacer(modifier = Modifier.size(10.dp))
+        //MenuComponent(viewModel, navController)
+        //Spacer(modifier = Modifier.size(10.dp))
         //HistoryScreen(navControler = null, viewModel = viewModel)
         Column(
             Modifier

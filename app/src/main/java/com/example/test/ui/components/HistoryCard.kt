@@ -41,7 +41,7 @@ import java.util.Locale
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun HistoryCard(viewModel: DatabaseViewModel = viewModel(), onButtonClick: () ->Unit) {
+fun HistoryCard(viewModel: DatabaseViewModel = viewModel(), navController: NavController) {
     val allData by viewModel.allData.collectAsState()
     LaunchedEffect(Unit){
         viewModel.getAllData()
@@ -100,7 +100,9 @@ fun HistoryCard(viewModel: DatabaseViewModel = viewModel(), onButtonClick: () ->
                 horizontalArrangement = Arrangement.Start,
             ) {
                 Button(
-                    onClick = onButtonClick,
+                    onClick = {
+                              navController.navigate("full_history")
+                    },
                     colors = buttonColors(
                         contentColor = Color.Black,
                         containerColor = Grey,

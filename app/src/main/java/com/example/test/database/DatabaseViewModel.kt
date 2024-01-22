@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
 
-
 class DatabaseViewModel(private val myDataDao: MyDataDao) : ViewModel() {
     private val _allData = MutableStateFlow<List<Data>>(emptyList())
     val allData : StateFlow<List<Data>> = _allData.asStateFlow()

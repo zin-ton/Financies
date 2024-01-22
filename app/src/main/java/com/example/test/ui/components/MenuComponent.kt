@@ -27,11 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.test.database.DatabaseViewModel
-import com.example.test.ui.pages.HistoryScreen
+//import com.example.test.ui.pages.HistoryScreen
 import com.example.test.ui.pages.MainPage
 import com.example.test.ui.theme.Cyan
 import com.example.test.ui.theme.Grey
@@ -43,12 +44,11 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-@Preview(showBackground = false, widthDp = 800, heightDp = 800)
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
     ExperimentalPagerApi::class
 )
-fun MenuComponent(viewModel: DatabaseViewModel = viewModel()) {
+fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: NavController) {
     val tabList = listOf("Main", "History")
     val pagerState = rememberPagerState()
     var tabIndex by remember { mutableStateOf(0) }
@@ -80,6 +80,10 @@ fun MenuComponent(viewModel: DatabaseViewModel = viewModel()) {
                             pagerState.animateScrollToPage(index)
                         }
                         tabIndex = index
+                        when (tabIndex){
+                            0 -> navController.navigate("main")
+                            1 -> navController.navigate("history")
+                        }
                     },
                     text = {
                         Text(text = text, style = MaterialTheme.typography.bodyLarge)
@@ -91,10 +95,10 @@ fun MenuComponent(viewModel: DatabaseViewModel = viewModel()) {
             count = tabList.size,
             state = pagerState
         ) { page ->
-            when (page) {
-                0 -> MainPage(viewModel = viewModel)
-                1 -> HistoryScreen(navControler = null, viewModel = viewModel)
-            }
+//            when (page) {
+//                0 -> navController.navigate("main")
+//                1 -> navController.navigate("history")
+//            }
         }
     }
 }
