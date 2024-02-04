@@ -30,18 +30,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.test.R
 import com.example.test.ui.theme.PinkLoginPage
 
 @Composable
 @Preview
-fun LoginAndRegisterPage() {
+fun LoginAndRegisterPage(navController: NavController) {
     val backgroundImage = painterResource(id = R.drawable.chooseimg)
     Image(
         painter = backgroundImage,
         contentDescription = null,
         Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .fillMaxHeight(0.9f),
         alpha = 0.9f,
         contentScale = ContentScale.Crop
     )
@@ -61,7 +63,9 @@ fun LoginAndRegisterPage() {
             Text(text = "Finance at Your Fingertips: Simplify", fontSize = 16.sp)
             Text(text = "Visualize, Optimize", fontSize = 16.sp)
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("register")
+                },
                 Modifier
                     .fillMaxWidth(0.9f),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
@@ -70,7 +74,9 @@ fun LoginAndRegisterPage() {
                 Text(text = "Register", fontSize = 16.sp, textAlign = TextAlign.Left)
             }
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("login")
+                },
                 Modifier
                     .fillMaxWidth(0.9f),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),

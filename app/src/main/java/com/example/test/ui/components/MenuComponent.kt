@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
     ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
     ExperimentalPagerApi::class
 )
-fun MenuComponent(viewModel: DatabaseViewModel = viewModel(), navController: NavController) {
+fun MenuComponent(viewModel: DatabaseViewModel, navController: NavController) {
     val tabList = listOf("Main", "History")
     val pagerState = rememberPagerState()
 

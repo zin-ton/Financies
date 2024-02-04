@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="FullHistory">
+      <entry key="AddPage">
         <State />
       </entry>
-      <entry key="HistoryCard">
+      <entry key="Login">
         <State />
       </entry>
       <entry key="LoginAndRegisterPage">
@@ -14,8 +14,21 @@
       <entry key="MainPage">
         <State />
       </entry>
-      <entry key="MenuComponent">
-        <State />
+      <entry key="RegisterPage">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\zhili\.android\avd\Pixel_7_Pro_API_33.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-27T15:40:45.624921100Z" />
+        </State>
       </entry>
       <entry key="app">
         <State />

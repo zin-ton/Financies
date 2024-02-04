@@ -56,7 +56,10 @@ import java.util.Locale
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),  navController: NavController) {
+fun FullHistory(
+    viewModel: DatabaseViewModel,
+    navController: NavController
+) {
     val allData by viewModel.allData.collectAsState()
     LaunchedEffect(Unit) {
         viewModel.getAllData()
@@ -158,7 +161,7 @@ fun FullHistory(viewModel: DatabaseViewModel = androidx.lifecycle.viewmodel.comp
         }
         Button(
             onClick = {
-                      navController.navigate("history")
+                navController.navigate("history")
             },
             Modifier
                 .fillMaxHeight()

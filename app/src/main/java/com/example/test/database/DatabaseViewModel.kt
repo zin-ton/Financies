@@ -1,5 +1,6 @@
 package com.example.test.database
 
+import android.app.Application
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
 
-class DatabaseViewModel(private val myDataDao: MyDataDao) : ViewModel() {
+class DatabaseViewModel(application: Application, private val myDataDao: MyDataDao) : ViewModel() {
     private val _allData = MutableStateFlow<List<Data>>(emptyList())
     val allData : StateFlow<List<Data>> = _allData.asStateFlow()
     /*constructor() : this(){

@@ -31,7 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun CardComponent(id : Int, viewModel: DatabaseViewModel = viewModel()){
+fun CardComponent(id : Int, viewModel: DatabaseViewModel){
     var component : Pair<String, Int>
     component = Pair("Food", 100)
     val allData by viewModel.allData.collectAsState()
@@ -47,7 +47,7 @@ fun CardComponent(id : Int, viewModel: DatabaseViewModel = viewModel()){
     }
     var image = painterResource(id = R.drawable.gas)
     if(component.first.equals("Food")) {image = painterResource(id = R.drawable.food)}
-    if(component.first.equals("Clothes")) {image = painterResource(id = R.drawable.clothing)}
+    if(component.first.equals("Clothing")) {image = painterResource(id = R.drawable.clothing)}
     if(component.first.equals("Gas")) {image = painterResource(id = R.drawable.gas)}
     if(component.first.equals("Medicine")) {image = painterResource(id = R.drawable.medicine)}
     if(component.first.equals("Rent")) {image = painterResource(id = R.drawable.rent)}

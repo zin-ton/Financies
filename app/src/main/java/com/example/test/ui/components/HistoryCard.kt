@@ -41,7 +41,7 @@ import java.util.Locale
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun HistoryCard(viewModel: DatabaseViewModel = viewModel(), navController: NavController) {
+fun HistoryCard(viewModel: DatabaseViewModel, navController: NavController) {
     val allData by viewModel.allData.collectAsState()
     LaunchedEffect(Unit){
         viewModel.getAllData()
@@ -85,11 +85,11 @@ fun HistoryCard(viewModel: DatabaseViewModel = viewModel(), navController: NavCo
             )
             if (allData.size >= 5) {
                 for (i in allData.size-1 downTo  allData.size-5) {
-                    CardComponent(id = allData[i].id)
+                    CardComponent(viewModel = viewModel, id = allData[i].id)
                 }
             } else {
                 for (i in allData.size-1 downTo 0) {
-                    CardComponent(id = allData[i].id)
+                    CardComponent(viewModel = viewModel,id = allData[i].id)
                 }
             }
             Row(

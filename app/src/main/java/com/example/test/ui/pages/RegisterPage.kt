@@ -1,5 +1,6 @@
 package com.example.test.ui.pages
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,14 +35,18 @@ import com.example.test.network.NetworkOperations
 import com.example.test.ui.theme.PinkLoginPage
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.Connection
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import java.net.HttpURLConnection
 import kotlin.concurrent.thread
 
 @Composable
 @Preview
-fun Login(navController: NavController){
-    val backgroundImage = painterResource(id = R.drawable.login)
+fun RegisterPage(navController: NavController){
+    val backgroundImage = painterResource(id = R.drawable.registerpageimg)
     var login by remember { mutableStateOf("Login") }
     var password by remember { mutableStateOf("Password") }
     val networkOperation = NetworkOperations()
@@ -65,12 +69,13 @@ fun Login(navController: NavController){
         Column(
             Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.22f)
+                .fillMaxHeight(0.25f)
                 .background(color = PinkLoginPage, shape = RoundedCornerShape(40.dp)),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Login and continue your journey", fontSize = 16.sp)
+            Text(text = "Register to get maximum", fontSize = 16.sp)
+            Text(text = "Functionality", fontSize = 16.sp)
             OutlinedTextField(
                 value = login,
                 onValueChange = {newText ->
@@ -92,7 +97,7 @@ fun Login(navController: NavController){
             Button(
                 onClick = {
                     GlobalScope.launch {
-                       networkOperation.performLogin(login, password)
+                        networkOperation.performRegistration(login, password)
                     }
                     navController.navigate("main")
                 },
@@ -101,7 +106,7 @@ fun Login(navController: NavController){
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 shape = RoundedCornerShape(40.dp),
             ) {
-                Text(text = "Login", fontSize = 16.sp, textAlign = TextAlign.Left)
+                Text(text = "Register", fontSize = 16.sp, textAlign = TextAlign.Left)
             }
         }
     }
